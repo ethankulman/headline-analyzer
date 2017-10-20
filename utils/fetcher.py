@@ -21,7 +21,7 @@ def get_articles(sources):
         story_headings = soup.findAll(s['elem'], attrs={'class': s['class']})
         rows = []
         for r in story_headings:
-            r = re.sub(r'[^\w\s]', '', r.text.decode("utf-8"))
+            r = re.sub(r'[^\w\s]', '', r.text)
             rows.append([s['source'], r.strip()])
         writer.writerows(rows)
 
