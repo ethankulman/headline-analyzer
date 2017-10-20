@@ -10,7 +10,7 @@ sources = [{'source': 'NyTimes', 'url': 'https://www.nytimes.com/section/politic
           {'source': 'Fox', 'url': 'http://www.foxnews.com/politics.html', 'elem': 'h2', 'class': 'title'}]
 
 def get_articles(sources):
-    outfile = open("./headlines.csv", "wb")
+    outfile = open("./headlines.csv", "w")
     writer = csv.writer(outfile)
     writer.writerows([['Source', 'Title']])
     session = requests.session()
