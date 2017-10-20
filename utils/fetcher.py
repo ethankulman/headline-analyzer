@@ -43,7 +43,7 @@ def checker(sources):
             except KeyError:
                 finished = False
                 break
-    except urlfetch.Error:
+    except UnicodeDecodeError:
         finished = False
     if not finished:
         checker(sources)

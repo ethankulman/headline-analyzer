@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from flask import render_template
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from utils.fetcher import checker
 from utils.parser import parser
 from utils.language_processor import analyzer
