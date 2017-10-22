@@ -1,15 +1,15 @@
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-from app import Word
+import app
 
 
 
 
 def analyzer(today):
-    sources = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
+    agencies = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
     to_plot = {}
-    for s in sources:
+    for s in agencies:
         news = today[s]
         src = []
         for w in news:
@@ -32,7 +32,7 @@ def analyzer(today):
             if total > 0:
                 avg_sent = sentiment/total
                 avg_mag = magnitude/total
-                word = Word(word=w, source=s, headlines=headlines, sentiment=avg_sent, magnitude=avg_mag)
+                word = app.Word(word=w, source=s, headlines=headlines, sentiment=avg_sent, magnitude=avg_mag)
             src.append([w, avg_sent, avg_mag])
         to_plot[s] = src
     return to_plot
