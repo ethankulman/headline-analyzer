@@ -24,4 +24,4 @@ def daily_split(to_plot):
 
     fig['layout'].update(height=600, width=600, title="Top Words From Today's Headlines",
                          xaxis=dict(title='News Agency'), yaxis=dict(title='Sentiment'))
-    py.plot(fig, filename='daily-words')
+    py.plot(fig, filename='daily-words', auto_open=False)

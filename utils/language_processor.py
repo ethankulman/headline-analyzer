@@ -14,7 +14,7 @@ def analyzer(today):
         src = []
         for w in news:
             stories = news[w]
-            headlines = []
+            total_headlines = 0
             sentiment = 0
             magnitude = 0
             avg_sent = 0
@@ -25,14 +25,20 @@ def analyzer(today):
                           type=enums.Document.Type.PLAIN_TEXT)
                 sent = client.analyze_sentiment(document=document).document_sentiment
                 if sent.score != 0:
+                    total_headlines += 1
+                    if total_headlines == 1:
+                        word = app.Word(word=w, source=s)
                     sentiment += sent.score
                     magnitude += sent.magnitude
-                    headlines.append(h)
-            total = len(headlines)
-            if total > 0:
-                avg_sent = sentiment/total
-                avg_mag = magnitude/total
-                word = app.Word(word=w, source=s, headlines=headlines, sentiment=avg_sent, magnitude=avg_mag)
+                    headline = app.Headline(h, word.id)
+                    app.db.session.add(headline)
+
+            if total_headlines:
+                avg_sent = sentiment/total_headlines
+                avg_mag = magnitude/total_headlines
+                word.sentiment = avg_sent
+                word.magnitude = avg_mag
+            app.db.session.commit()
             src.append([w, avg_sent, avg_mag])
         to_plot[s] = src
     return to_plot
