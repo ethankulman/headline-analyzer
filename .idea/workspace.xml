@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2a1260c-48ef-4123-a39e-baf9b9346f15" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/headlines.csv" afterPath="$PROJECT_DIR$/headlines.csv" />
-    </list>
+    <list default="true" id="a2a1260c-48ef-4123-a39e-baf9b9346f15" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
