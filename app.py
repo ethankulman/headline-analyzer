@@ -1,11 +1,10 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from utils.fetcher import checker
 from utils.parser import parser
 from utils.language_processor import analyzer
 from utils.charts import daily_split
-from utils.celery_setup import make_celery
 import jinja2
 
 sources = [{'source': 'NyTimes', 'url': 'https://www.nytimes.com/section/politics', 'elem': 'h2', 'class': 'headline'},
@@ -15,18 +14,9 @@ sources = [{'source': 'NyTimes', 'url': 'https://www.nytimes.com/section/politic
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config.update(
-    CELERY_BROKER_URL='redis://localhost:6379',
-    CELERY_RESULT_BACKEND='redis://localhost:6379'
-)
 
 db = SQLAlchemy(app)
 
-celery = make_celery(app)
-
-@celery.task()
-def say_hi():
-    print("Hi")
 
 def add_today_data():
     check = checker(sources)
@@ -66,9 +56,15 @@ db.create_all()
 
 @app.route('/')
 def index():
-    add_today_data()
-    return render_template('index.html')
+    if request.method == "GET":
+        return render_template('index.html')
 
+@app.route("/update")
+def updated():
+    if request.method == "GET":
+        return "This is the updater =)"
+    if request.method == "POST":
+        add_today_data()
 
 @app.route('/robots.txt')
 def robots():
