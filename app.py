@@ -7,12 +7,19 @@ from utils.language_processor import analyzer
 from utils.charts import daily_split
 import jinja2
 
+# must export FLASK_APP, DATABASE_URL,
+# export FLASK_APP=app.py
+# export DATABASE_URL=""
+# export google credentials
+
+
 sources = [{'source': 'NyTimes', 'url': 'https://www.nytimes.com/section/politics', 'elem': 'h2', 'class': 'headline'},
           {'source': 'Breitbart', 'url': 'http://www.breitbart.com/big-government/', 'elem': 'h2', 'class': 'title'},
           {'source': 'Huffington', 'url': 'http://www.huffingtonpost.com/section/politics', 'elem': 'h2', 'class': 'card__headline'},
           {'source': 'Fox', 'url': 'http://www.foxnews.com/politics.html', 'elem': 'h2', 'class': 'title'}]
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 db = SQLAlchemy(app)
@@ -76,6 +83,4 @@ def robots():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    #tomorrow = datetime.utcnow() + timedelta(days=1)
-    #result = add_today_data.apply_async(eta=tomorrow)
     app.run(debug=True)
