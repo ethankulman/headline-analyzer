@@ -9,18 +9,23 @@
   <meta name="robots" content="all">
   <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" />
   <link href="static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="static/stylesheet.css" rel="stylesheet" type="text/css"/>
+  <link href="static/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css" />
+  <link href="static/css/bootstrap-grid.css" rel="stylesheet" type="text/css" />
+  <link href="static/css/bootstrap-reboot.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
 
 <body lang="en">
-  <nav class="navbar navbar-expand-md light bg-light mb-4">
-    <a class="navbar-brand" href="headline-analyzer.herokuapp.com">Headline Analyzer</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a href="https://github.com/ethankulman/headline-analyzer"><span class="glyphicons glyphicons-leaf"></span></a></li>
+  <div>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand active" href="/">Headline Analyzer</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ethankulman/headline-analyzer">Repo</a>
+        </li>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </div>
   <div class="jumbotron jumbotron-fluid">
     <div id="main" class="container" role="main">
       {% block content %}

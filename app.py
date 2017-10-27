@@ -6,6 +6,7 @@ from utils.parser import parser
 from utils.language_processor import analyzer
 from utils.charts import daily_split
 import jinja2
+import datetime
 
 # must export FLASK_APP, DATABASE_URL,
 # export FLASK_APP=app.py
@@ -34,10 +35,10 @@ def add_today_data():
 
 
 class Word(db.Model):
-    __tablename__ = "Word"
+    __tablename__ = "word"
     id = db.Column(db.Integer, primary_key=True)
     word = db.Column(db.String(20))
-    date = db.Column(db.Date())
+    date = db.Column(db.DateTime(), default=datetime.date.today())
     source = db.Column(db.String())
     sentiment = db.Column(db.Float(), nullable=True)
     magnitude = db.Column(db.Float(), nullable=True)
@@ -46,8 +47,11 @@ class Word(db.Model):
         self.word = word
         self.source = source
 
+    def __repr__(self):
+        return "<%s >" % self.word
+
 class Headline(db.Model):
-    __tablename__ = "Headlines"
+    __tablename__ = "headlines"
     id = db.Column(db.Integer, primary_key=True)
     headline = db.Column(db.String(128))
     word_id = db.Column(db.Integer)
@@ -56,7 +60,8 @@ class Headline(db.Model):
         self.headline = headline
         self.word_id = word_id
 
-
+    def __repr__(self):
+        return "<%s >" % self.headline
 
 
 db.create_all()
@@ -64,14 +69,14 @@ db.create_all()
 @app.route('/')
 def index():
     if request.method == "GET":
+        #trump_tracker()
         return render_template('index.html')
 
 @app.route("/update")
 def updated():
     if request.method == "GET":
-        return "This is the updater =)"
-    if request.method == "POST":
         add_today_data()
+
 
 @app.route('/robots.txt')
 def robots():

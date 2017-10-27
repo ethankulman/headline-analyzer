@@ -34,7 +34,7 @@ def parser():
         for w in range(0, 3):
             p = max(count, key=count.get)
             top_words[p] = []
-            count[p] = None
+            count[p] = 0
 
         ordered = collections.OrderedDict(sorted(top_words.items()))
 
@@ -44,3 +44,4 @@ def parser():
                     ordered[w].append(h)
         today[s] = ordered
     return today
+

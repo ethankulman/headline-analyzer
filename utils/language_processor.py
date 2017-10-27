@@ -38,6 +38,7 @@ def analyzer(today):
                 avg_mag = magnitude/total_headlines
                 word.sentiment = avg_sent
                 word.magnitude = avg_mag
+                app.db.session.add(word)
             app.db.session.commit()
             src.append([w, avg_sent, avg_mag])
         to_plot[s] = src
