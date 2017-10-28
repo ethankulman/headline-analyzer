@@ -21,7 +21,7 @@ def analyzer(today):
             avg_mag = 0
             for h in stories:
                 client = language.LanguageServiceClient()
-                document = types.Document(content=unicode(h),
+                document = types.Document(content=str(h),
                           type=enums.Document.Type.PLAIN_TEXT)
                 sent = client.analyze_sentiment(document=document).document_sentiment
                 if sent.score != 0:

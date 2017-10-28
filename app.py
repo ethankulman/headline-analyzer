@@ -78,6 +78,8 @@ def index():
 def updated():
     if request.method == "GET":
         add_today_data()
+        return "Database Updated!"
+
 
 
 @app.route('/robots.txt')
