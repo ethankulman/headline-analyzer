@@ -1,6 +1,8 @@
 import pandas as pd
 import nltk
+nltk.download()
 from nltk.corpus import stopwords
+
 import collections
 
 
