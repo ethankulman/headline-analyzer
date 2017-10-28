@@ -4,7 +4,6 @@ import plotly.graph_objs as go
 from plotly import tools
 import plotly
 import pandas as pd
-plotly.plotly.sign_in("ethankulman", "sucremagraine")
 plotly.tools.set_credentials_file(username='ethankulman', api_key='X3AcpgRUt9w6cM2vhmLv')
 
 
