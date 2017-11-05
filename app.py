@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from utils.fetcher import checker
 from utils.parser import parser
 from utils.language_processor import analyzer
-from utils.charts import daily_split
+from utils.charts import daily_split, trump_tracker
 import jinja2
 import datetime
 
@@ -34,6 +34,8 @@ def add_today_data():
         today = parser()
         daily = analyzer(today)
         daily_split(daily)
+        trump_tracker()
+
 
 
 class Word(db.Model):

@@ -28,8 +28,12 @@ def analyzer(today):
                     total_headlines += 1
                     if total_headlines == 1:
                         word = app.Word(word=w, source=s)
+                        app.db.session.add(word)
+                        app.db.session.flush()
                     sentiment += sent.score
                     magnitude += sent.magnitude
+                    print(word.id)
+                    print(word)
                     headline = app.Headline(h, word.id)
                     app.db.session.add(headline)
 
