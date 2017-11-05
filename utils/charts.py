@@ -4,8 +4,7 @@ import plotly.graph_objs as go
 from plotly import tools
 import plotly
 import pandas as pd
-plotly.tools.set_credentials_file(username='ethankulman', api_key='X3AcpgRUt9w6cM2vhmLv')
-
+# set plotly credentials
 
 def daily_split(to_plot):
     sources = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
