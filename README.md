@@ -6,4 +6,4 @@ This data is then used to plot data to show bias based off of published research
 "New Media and the Polarization of American Political Discourse" (Matthew A. Baum and Tim Groeling, 2008), "Fair and Balanced?
 Quantifying Media Bias Through Crowdsourced Content Analysis (Ceren Budak, Sharad Goel, Justin M. Rao, 2016).
 
-Live application and more information can be found here: https://headline-analyzer.herokuapp.com
+
