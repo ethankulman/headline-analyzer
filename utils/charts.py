@@ -1,26 +1,36 @@
 import app
 import plotly.plotly as py
 import plotly.graph_objs as go
+from app.
 from plotly import tools
 import plotly
 import pandas as pd
 # set plotly credentials
 
-def daily_split(to_plot):
-    sources = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
+def plot_top_words(to_plot, num_top_words=3):
+    '''
+    Plots the most common headline phrases from each news source
+    '''
     fig = tools.make_subplots(rows=1, cols=1, specs=[[{}]],
                               shared_xaxes=True, shared_yaxes=True, horizontal_spacing=0.001)
-    for s in range(0, 4):
-        src = sources[s]
+
+    # go through each source
+    for name in range(len(source_names)):
+
+        src = source_names[name]
+
         words = to_plot[src]
+
+        # plot the top 3 most common words
         agency = go.Scatter(
-            x=[src, src, src],
-            y=[words[0][1], words[1][1], words[2][1]],
+            x=[src]*num_top_words,
+            y=[words[i][1] for i in range(0,num_top_words)],
             mode='markers+text',
             textposition='bottom',
             name=src,
-            text=[words[0][0].capitalize(), words[1][0].capitalize(), words[2][0].capitalize()],
+            text=[words[i][0].capitalize() for i in range(0,num_top_words)],
         )
+
         fig.append_trace(agency, 1, 1)
 
     fig['layout'].update(height=600, width=800, title="Top Words From Today's Headlines",
@@ -30,13 +40,9 @@ def daily_split(to_plot):
 
 
 def trump_tracker():
-    sources = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
 
-    nytimes = app.Word.query.filter_by(word="trump", source="NyTimes").all()
-    breit = app.Word.query.filter_by(word="trump", source="Breitbart").all()
-    fox = app.Word.query.filter_by(word="trump", source="Fox").all()
-    huff = app.Word.query.filter_by(word="trump", source="Huffington").all()
-    trump_sources = [nytimes, breit, fox, huff]
+    trump_sources = [app.Word.query.filter_by(word="trump", source=src).all() for src in source_names]
+
     srcs = {}
     for s in trump_sources:
         dates = []
@@ -48,15 +54,10 @@ def trump_tracker():
             magnitude.append(d.magnitude)
 
         srcs[s[0].source] = [dates, sentiment, magnitude]
-    print(srcs)
 
-    print("nyt: ", nytimes[0].source, breit[0].word)
-    print("breit: ", breit[0].source, breit[0].word)
-    print("fox: ", fox[0].source, fox[0].word)
-    print("huff: ", huff[0].source, huff[0].word)
     data = []
 
-    for s in range(0, 4):
+    for s in range(0, len(source_names)):
         agency = go.Scatter(
             x=srcs[sources[s]][0],
             y=srcs[sources[s]][1],

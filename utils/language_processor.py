@@ -2,14 +2,17 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 import app
+from app import source_names
 
 
 
 
 def analyzer(today):
-    agencies = ['NyTimes', 'Breitbart', 'Huffington', 'Fox']
+    '''
+    Uses google cloud nltk to determine sentiments of headlines 
+    '''
     to_plot = {}
-    for s in agencies:
+    for s in source_names:
         news = today[s]
         src = []
         for w in news:
@@ -47,5 +50,3 @@ def analyzer(today):
             src.append([w, avg_sent, avg_mag])
         to_plot[s] = src
     return to_plot
-
-
